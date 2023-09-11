@@ -12,4 +12,13 @@ public class ApplicationDbContext : DbContext // DbContext is the root class of 
     }
     
     public DbSet<Category> Categories { get; set; }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Category>().HasData(
+            new Category { Id = 1, Name = "Thriller", DisplayOrder = 1},
+            new Category { Id = 2, Name = "Horror", DisplayOrder = 2},
+            new Category { Id = 3, Name = "Science Fiction", DisplayOrder = 3}
+        );
+    }
 }
