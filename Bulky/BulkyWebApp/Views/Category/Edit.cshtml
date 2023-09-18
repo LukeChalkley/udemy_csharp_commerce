@@ -1,0 +1,32 @@
+@model Category
+
+<form method="post" xmlns="http://www.w3.org/1999/html">
+    <div class="border p-3 mt-3">
+        <div class="row pb-2">
+            <h2 class="text-primary">New Category</h2>
+            <hr />
+        </div>
+        
+        <div class="mb-3 row p-1">
+            <label asp-for="Name" class="p-1"></label>
+            <input class="form-control" asp-for="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        
+        <div class="mb-3 row p-1">
+            @* We cannot use <label /> here. The end tag needs to be specified after for DisplayName to work. *@
+            <label asp-for="DisplayOrder" class="p-1"></label>
+            <input class="form-control" asp-for="DisplayOrder"/>
+            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+        </div>
+        
+        <button type ="submit" class="btn-primary btn form-control">Edit</button> 
+    </div>
+</form>
+
+@section Scripts
+{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

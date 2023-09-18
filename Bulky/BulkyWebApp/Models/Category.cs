@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace BulkyWebApp.Models;
@@ -13,8 +14,13 @@ public class Category
     public int Id { get; set; } 
     
     [Required]  // When using ORM mapping, the SQL generated will have NotNull setting to True.
+    [DisplayName("Category Name")]
+    [MinLength(5, ErrorMessage = "Category Name must be 5 to 30 characters in length.")]
+    [MaxLength(30, ErrorMessage = "Category Name must be 5 to 30 characters in length.")]
     public String Name { get; set; }
     
     // I don't really understand this one yet. I feel this is more UI than Model.
+    [DisplayName("Display Order")]
+    [Range(1,100, ErrorMessage = "Display Order must be between 1 and 30.")]
     public int DisplayOrder { get; set; }
 }
