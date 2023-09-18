@@ -1,4 +1,5 @@
 using Bulky.DataAccess;
+using Bulky.DataAccess.Repositories;
 using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,21 +10,20 @@ namespace Bulky.WebApp.Controllers;
 public class CategoryController : Controller
 {
     private readonly ILogger<CategoryController> _logger;
-    private readonly ApplicationDbContext _dbContext;
+    private readonly ICategoryRepository _categoryContext;
 
-    public CategoryController(ILogger<CategoryController> logger,
-                              ApplicationDbContext dbContext)
+    public CategoryController(ILogger<CategoryController> logger, ICategoryRepository categoryContext)
     {
         _logger = logger;
-        _dbContext = dbContext;
+        _categoryContext = categoryContext;
     }
     
     // GET
     public IActionResult Index()
     {
-        var allCategories = _dbContext.Categories.ToList();
+        var allCategories = _categoryContext.GetAll();
 
-        return View(allCategories);
+        return View(allCategories.ToList());
     }
 
     public IActionResult Add()
@@ -34,15 +34,15 @@ public class CategoryController : Controller
     [HttpPost]
     public IActionResult Add(Category categoryToAdd)
     {
-        var existingCategory = _dbContext.Categories.SingleOrDefault(cat => cat.Name == categoryToAdd.Name);
+        var existingCategory = _categoryContext.GetFirstOrDefault(cat => cat.Name == categoryToAdd.Name);
 
         if (existingCategory != null)
             ModelState.AddModelError("Name", "Category already exists.");
 
         if (!ModelState.IsValid) return View();
         
-        _dbContext.Categories.Add(categoryToAdd);
-        _dbContext.SaveChanges();
+        _categoryContext.Add(categoryToAdd);
+        _categoryContext.Save();
 
         TempData["PageMessage"] = $"Successfully added category {categoryToAdd.Name}.";
         
@@ -55,30 +55,30 @@ public class CategoryController : Controller
         if (!ID.HasValue)
             return NotFound();
         
-        var categoryToEdit = _dbContext.Categories.Find(ID);
+        var existingCategory = _categoryContext.GetFirstOrDefault(cat => cat.Id == ID);
 
-        if (categoryToEdit == null)
+        if (existingCategory == null)
             return NotFound();
         
-        return View(categoryToEdit);
+        return View(existingCategory);
     }
     
     [HttpPost]
     public IActionResult Edit(Category categoryToEdit)
     {
-        var existingCategory = _dbContext.Categories.SingleOrDefault(cat => cat.Name == categoryToEdit.Name);
+        var existingCategory = _categoryContext.GetFirstOrDefault(cat => cat.Name == categoryToEdit.Name);
 
         if (existingCategory != null && categoryToEdit.Id != existingCategory.Id)
             ModelState.AddModelError("Name", "Cannot edit category to match existing category.");
 
         if (ModelState.IsValid)
         { 
-            _dbContext.Update(categoryToEdit);
-            _dbContext.SaveChanges();
+            _categoryContext.Update(categoryToEdit);
+            _categoryContext.Save();
             
             TempData["PageMessage"] = $"Successfully edited category {categoryToEdit.Name}.";
-            
-            var allCategories = _dbContext.Categories.ToList();
+
+            var allCategories = _categoryContext.GetAll().ToList();
             
             return View("Index", allCategories);
         }
@@ -92,7 +92,7 @@ public class CategoryController : Controller
         if (!ID.HasValue)
             return NotFound();
         
-        var categoryToEdit = _dbContext.Categories.Find(ID);
+        var categoryToEdit = _categoryContext.GetFirstOrDefault(cat => cat.Id == ID);
 
         if (categoryToEdit == null)
             return NotFound();
@@ -106,16 +106,16 @@ public class CategoryController : Controller
         if (!ID.HasValue)
             return NotFound();
         
-        var categoryToDelete = _dbContext.Categories.Find(ID);
+        var categoryToDelete = _categoryContext.GetFirstOrDefault(cat => cat.Id == ID);
 
         var catToDeleteName = categoryToDelete.Name;
         
-        _dbContext.Categories.Remove(categoryToDelete);
-        _dbContext.SaveChanges();
+        _categoryContext.Delete(categoryToDelete);
+        _categoryContext.Save();
 
         TempData["PageMessage"] = $"Successfully deleted category {catToDeleteName}.";
-        
-        var allCategories = _dbContext.Categories.ToList();
+
+        var allCategories = _categoryContext.GetAll().ToList();
         
         return View("Index", allCategories);
     }

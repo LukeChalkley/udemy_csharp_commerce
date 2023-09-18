@@ -1,4 +1,5 @@
 using Bulky.DataAccess;
+using Bulky.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -9,6 +10,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseSqlServer(connectionString: builder.Configuration.GetConnectionString("DefaultConnection")));   //GetConnectionString comes from appsettings.json.
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 
