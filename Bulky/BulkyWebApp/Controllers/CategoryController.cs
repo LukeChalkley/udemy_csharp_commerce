@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace BulkyWebApp.Controllers;
+namespace Bulky.WebApp.Controllers;
 
 public class CategoryController : Controller
 {
