@@ -10,8 +10,6 @@ public class Index : PageModel
     {
         _logger = logger;
     }
-
-    
     
     public void OnGet()
     {
