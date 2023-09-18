@@ -1,5 +1,5 @@
-using BulkyWebApp.Data;
-using BulkyWebApp.Models;
+using Bulky.DataAccess;
+using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -113,7 +113,7 @@ public class CategoryController : Controller
         _dbContext.Categories.Remove(categoryToDelete);
         _dbContext.SaveChanges();
 
-        TempData["PageMessage"] = $"Successfully edited category {catToDeleteName}.";
+        TempData["PageMessage"] = $"Successfully deleted category {catToDeleteName}.";
         
         var allCategories = _dbContext.Categories.ToList();
         

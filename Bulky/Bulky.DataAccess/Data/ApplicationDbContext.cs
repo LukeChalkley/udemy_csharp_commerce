@@ -1,7 +1,7 @@
-using BulkyWebApp.Models;
 using Microsoft.EntityFrameworkCore;
+using Bulky.Models;
 
-namespace BulkyWebApp.Data;
+namespace Bulky.DataAccess;
 
 public class ApplicationDbContext : DbContext // DbContext is the root class of Entity Framework Core.
 {
