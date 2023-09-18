@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkyWebApp", "BulkyWebApp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkyRazer", "BulkyRazer\BulkyRazer.csproj", "{913CCFDE-713B-456F-B9BC-94D946A07016}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bulky.DataAccess", "Bulky.DataAccess\Bulky.DataAccess.csproj", "{DFF05493-EC59-4A94-8C34-7C3A7AB6B3D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bulky.Models", "Bulky.Models\Bulky.Models.csproj", "{4E6F396E-A472-47F7-A61D-303329D92AA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{913CCFDE-713B-456F-B9BC-94D946A07016}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{913CCFDE-713B-456F-B9BC-94D946A07016}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{913CCFDE-713B-456F-B9BC-94D946A07016}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFF05493-EC59-4A94-8C34-7C3A7AB6B3D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFF05493-EC59-4A94-8C34-7C3A7AB6B3D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFF05493-EC59-4A94-8C34-7C3A7AB6B3D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFF05493-EC59-4A94-8C34-7C3A7AB6B3D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E6F396E-A472-47F7-A61D-303329D92AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E6F396E-A472-47F7-A61D-303329D92AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E6F396E-A472-47F7-A61D-303329D92AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E6F396E-A472-47F7-A61D-303329D92AA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
